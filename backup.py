@@ -1,4 +1,5 @@
 import gzip
+import logging
 import os
 from datetime import datetime
 from shutil import copyfileobj
@@ -7,15 +8,7 @@ from databases import DATABASES
 from dotenv import load_dotenv
 from sh import pg_dump
 
-DATABASES = [
-    "dm_vietnam",
-    "bot_cambo",
-    "bot_vietnam",
-    "dm_nigeria",
-    "dm_cambodia",
-    "bot_nigeria",
-    "warninger",
-]
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 
 def backup():
@@ -26,6 +19,7 @@ def backup():
         date = datetime.now().strftime("%Y-%m-%d")
         temp_filename = os.path.join(temp_path, f"{db}-{date}.sql")
         filename = os.path.join(backup_path, f"{db}-{date}.sql.gz")
+        logging.info(f"Backing up {db} to {filename}")
 
         # Dump database
         with open(temp_filename, "wb") as f:
