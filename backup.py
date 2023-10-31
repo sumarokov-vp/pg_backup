@@ -2,6 +2,7 @@ import gzip
 import os
 from datetime import datetime
 
+from dotenv import load_dotenv
 from sh import pg_dump
 
 DATABASES = [
@@ -18,6 +19,7 @@ BACKUP_PATH = "/root/yandex_uploader/tempbackup/"
 
 
 def backup():
+    load_dotenv()
     for db in DATABASES:
         date = datetime.now().strftime("%Y-%m-%d")
         filename = os.path.join(BACKUP_PATH, f"{db}-{date}.sql")
