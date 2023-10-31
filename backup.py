@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 from shutil import copyfileobj
 
+from databases import DATABASES
 from dotenv import load_dotenv
 from sh import pg_dump
 
